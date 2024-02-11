@@ -4,6 +4,7 @@ tap "hashicorp/tap"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
 
+brew "1password-cli"
 brew "antigen"
 brew "argo"
 brew "argocd"
