@@ -33,3 +33,21 @@ Required Software
 * tldr
 * zoxide
 * zsh
+* btop
+* fira-code
+* fira-code-nerd-font
+
+Programming Language Support
+----------------------------
+
+* php
+  * composer
+* python
+* go
+* nodejs
+  * yarn
+
+Notes
+-----
+
+These dotfiles replace some core functionality with their "next-gen" counterparts, for example `cat` is aliased to `bat`. For a full list refer to the .zshrc file.
