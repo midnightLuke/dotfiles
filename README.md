@@ -47,6 +47,13 @@ Programming Language Support
 * nodejs
   * yarn
 
+Post-Install Tasks
+------------------
+
+* [ ] Set up the [1Password SSH Agent](https://developer.1password.com/docs/ssh).
+* [ ] Set up the [1Password SSH Git Signing](https://developer.1password.com/docs/ssh).
+* [ ] Add `.gitignore.local` file.
+
 Notes
 -----
 
