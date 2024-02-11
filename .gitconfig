@@ -10,13 +10,13 @@
   ui = true
 
 [commit]
-	gpgSign = true
+  gpgSign = true
 
 [gpg]
-	program = gpg
+  program = gpg
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 [include]
   path = ~/.gitconfig.local
