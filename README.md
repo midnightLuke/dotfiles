@@ -58,3 +58,8 @@ Notes
 -----
 
 These dotfiles replace some core functionality with their "next-gen" counterparts, for example `cat` is aliased to `bat`. For a full list refer to the .zshrc file.
+
+Acknowledgements
+----------------
+
+These are heavily inspired by joshukraines excellent [dotfiles](https://github.com/joshukraine/dotfiles/).
