@@ -1,8 +1,11 @@
+# REFERENCE:
 # https://starship.rs/config/
 # https://www.nerdfonts.com/cheat-sheet
 
 add_newline = false
 command_timeout = 2000
+
+right_format = """$time"""
 
 [package]
 disabled = true
@@ -12,13 +15,13 @@ style = "bold bright-blue"
 
 [git_branch]
 style = "bold bright-white"
-symbol = " "
+symbol = "󰘬 "
 
 [git_status]
 ahead = "[](purple)[$count](white)"
 behind = "[](cyan)[$count](white)"
 conflicted = '[=$count](yellow)'
-deleted = '[✘$count](black)'
+deleted = '[✘$count](bright-black)'
 diverged = "[](cyan)[$ahead_count](white)[](purple)[$behind_count](white)"
 modified = '[*$count](red)'
 renamed = "[»$count](purple)"
@@ -29,14 +32,26 @@ untracked = "[?$count](cyan)"
 
 [git_commit]
 only_detached = true
-style = "bold black"
+style = "bright-black"
 format = "[$hash]($style) "
 
 [ruby]
 symbol = " "
 
 [nodejs]
-symbol = " "
+symbol = "󰎙 "
 
 [python]
-symbol = " "
+symbol = "󰌠 "
+
+[shell]
+disabled = false
+style = 'cyan'
+bash_indicator = '\$'
+fish_indicator = '󰈺'
+zsh_indicator = '%'
+
+[time]
+disabled = false
+format = '[󱑎 $time]($style) '
+style = "bright-black"

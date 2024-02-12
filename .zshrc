@@ -1,5 +1,6 @@
 # Antigen setup.
-source /opt/homebrew/opt/antigen/share/antigen/antigen.zsh
+[ -f ~/.local/bin/antigen.zsh ] && source ~/.local/bin/antigen.zsh
+[ -f /opt/homebrew/antigen/share/antigen/antigen.zsh ] && source /opt/homebrew/antigen/share/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
 antigen bundle sudo
@@ -7,6 +8,7 @@ antigen bundle command-not-found
 antigen bundle docker
 antigen bundle docker-compose
 antigen bundle kubectl
+antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
 
 # Set up zoxide.
