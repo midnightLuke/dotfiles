@@ -23,7 +23,7 @@ export HISTFILE="$HOME/.zsh_history"
 export HIST_STAMPS="yyyy-mm-dd"
 export GPG_TTY=$(tty)
 export GOPATH=$HOME/go
-export GOROOT=$(brew --prefix)/opt/go/libexec
+export GOROOT=/opt/homebrew/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 
 # Aliases and overrides.
