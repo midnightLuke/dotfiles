@@ -1,6 +1,6 @@
 # Antigen setup.
 [ -f ~/.local/bin/antigen.zsh ] && source ~/.local/bin/antigen.zsh
-[ -f /opt/homebrew/antigen/share/antigen/antigen.zsh ] && source /opt/homebrew/antigen/share/antigen/antigen.zsh
+[ -f /opt/homebrew/share/antigen/antigen.zsh ] && source /opt/homebrew/share/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
 antigen bundle sudo
