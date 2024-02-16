@@ -1,6 +1,11 @@
 # Antigen setup.
-[ -f ~/.local/bin/antigen.zsh ] && source ~/.local/bin/antigen.zsh
-[ -f /opt/homebrew/share/antigen/antigen.zsh ] && source /opt/homebrew/share/antigen/antigen.zsh
+if command -v brew &> /dev/null
+then
+  [ -f $(brew --prefix)/share/antigen/antigen.zsh ] && source $(brew --prefix)/share/antigen/antigen.zsh
+else
+  [ -f ~/.local/bin/antigen.zsh ] && source ~/.local/bin/antigen.zsh
+fi
+
 antigen use oh-my-zsh
 antigen bundle git
 antigen bundle sudo
@@ -23,7 +28,6 @@ export HISTFILE="$HOME/.zsh_history"
 export HIST_STAMPS="yyyy-mm-dd"
 export GPG_TTY=$(tty)
 export GOPATH=$HOME/go
-export GOROOT=/opt/homebrew/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 
 # Aliases and overrides.
