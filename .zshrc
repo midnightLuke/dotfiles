@@ -40,6 +40,9 @@ alias cat="bat"
 alias htop="btop"
 alias diff="diff-so-fancy"
 alias more="most"
+alias pcupd="podman compose up -d"
+alias pcdn="podman compose down"
+alias pce="podman compose exec"
 
 # Start starship.
 eval "$(starship init zsh)"
