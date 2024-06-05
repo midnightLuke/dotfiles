@@ -46,7 +46,9 @@ alias pc="podman compose"
 # Start starship.
 eval "$(starship init zsh)"
 
+# Key bindings.
 bindkey -v
+bindkey '^R' history-incremental-search-backward
 
 # Start autocompletion.
 autoload -Uz compinit
