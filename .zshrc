@@ -10,8 +10,6 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle sudo
 antigen bundle command-not-found
-antigen bundle docker
-antigen bundle docker-compose
 antigen bundle kubectl
 antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
@@ -43,6 +41,7 @@ alias more="most"
 alias pcupd="podman compose up -d"
 alias pcdn="podman compose down"
 alias pce="podman compose exec"
+alias pc="podman compose"
 
 # Start starship.
 eval "$(starship init zsh)"
