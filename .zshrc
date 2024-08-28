@@ -42,6 +42,12 @@ alias pcupd="podman compose up -d"
 alias pcdn="podman compose down"
 alias pce="podman compose exec"
 alias pc="podman compose"
+alias p="podman"
+alias pcps="podman compose ps"
+alias pcl="podman compose logs"
+alias pclf="podman compose logs -f"
+alias pcr="podman compose run --rm -it"
+alias lg="lazygit"
 
 # Start starship.
 eval "$(starship init zsh)"
@@ -50,12 +56,15 @@ eval "$(starship init zsh)"
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
+# Homebrew autocompletion.
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
 # Start autocompletion.
 autoload -Uz compinit
 compinit
-
-# Kubectl autocomplete.
-source <(kubectl completion zsh)
 
 # Set up fzf.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
