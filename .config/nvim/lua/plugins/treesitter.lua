@@ -2,6 +2,11 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
+      highlight = {
+        enable = true,
+        disable = { "org" },
+        additional_vim_regex_highlighting = { "org" },
+      },
       ensure_installed = {
         "bash",
         "c",
@@ -17,6 +22,7 @@ return {
         "luap",
         "markdown",
         "markdown_inline",
+        "org",
         "php",
         "python",
         "query",
