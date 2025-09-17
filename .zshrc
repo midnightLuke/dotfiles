@@ -66,5 +66,15 @@ fi
 autoload -Uz compinit
 compinit
 
+# kubectl autocompletion
+if command -v kubectl &>/dev/null; then
+  source <(kubectl completion zsh)
+fi
+
+# oc (OpenShift CLI) autocompletion
+if command -v oc &>/dev/null; then
+  source <(oc completion zsh)
+fi
+
 # Set up fzf.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
