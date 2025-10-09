@@ -27,6 +27,8 @@ export HIST_STAMPS="yyyy-mm-dd"
 export GPG_TTY=$(tty)
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.npm-global/bin
 
 # Aliases and overrides.
 alias k="kubectl"
