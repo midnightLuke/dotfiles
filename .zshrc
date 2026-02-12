@@ -29,6 +29,8 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.npm-global/bin
+export PATH=$PATH:$HOME/.composer/vendor/bin
+export PATH=$PATH:$HOME/.local/bin
 
 # Aliases and overrides.
 alias k="kubectl"
