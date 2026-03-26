@@ -12,6 +12,7 @@ return {
         name = "Listen for Xdebug",
         port = 9003,
         pathMappings = {
+          ["/app"] = "${workspaceFolder}",
           ["/var/www/html"] = "${workspaceFolder}",
         },
       },
