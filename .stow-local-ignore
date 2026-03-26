@@ -1,8 +1,9 @@
 \.git
 \.gitignore
 
-^/README.*
-^/LICENSE.*
+^/README*
+^/LICENSE*
 ^/COPYING
-
+scripts
 install
+\.claude
