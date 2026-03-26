@@ -10,7 +10,6 @@
 # - `CLAUDE_MODEL_NERD` - Model with version (e.g., "󱚦 opus 4.5")
 # - `CLAUDE_CONTEXT` - Context window usage percentage (left-padded, e.g., "15%")
 # - `CLAUDE_COST` - Formatted session cost (e.g., "$0.71")
-# - `CLAUDE_RATE_LIMITS` - Pro/Max rate limit usage (e.g., "5h:23% 7d:41%")
 # - `CLAUDE_SUMMARY` - Session summary extracted from transcript
 # - `CLAUDE_STAR` - Star character for prompt decoration
 #
@@ -37,10 +36,6 @@
 # - `CLAUDE_OUTPUT_TOKENS` - Current usage output tokens
 # - `CLAUDE_CACHE_CREATION` - Cache creation input tokens
 # - `CLAUDE_CACHE_READ` - Cache read input tokens
-# - `CLAUDE_RATE_5H_PCT` - 5-hour rolling window usage percentage (0-100)
-# - `CLAUDE_RATE_5H_RESETS` - Unix timestamp when 5-hour window resets
-# - `CLAUDE_RATE_7D_PCT` - 7-day rolling window usage percentage (0-100)
-# - `CLAUDE_RATE_7D_RESETS` - Unix timestamp when 7-day window resets
 #
 # Computed values:
 # - `CLAUDE_CURRENT_TOKENS` - Sum of input + cache tokens (for context %)
@@ -171,18 +166,13 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
       (if .context_window.current_usage == null then "" else (.context_window.current_usage.cache_read_input_tokens // 0) end), # 21
       # Computed values (indexes 22-23)
       (.model.display_name // .model.id // ""),                     # 22 - raw_model
-      (.workspace.current_dir // .workspace.project_dir // .cwd // ""), # 23 - dir
-      # Rate limits (indexes 24-27) - only present for Pro/Max subscribers
-      (.rate_limits.five_hour.used_percentage // ""),               # 24
-      (.rate_limits.five_hour.resets_at // ""),                     # 25
-      (.rate_limits.seven_day.used_percentage // ""),               # 26
-      (.rate_limits.seven_day.resets_at // "")                      # 27
+      (.workspace.current_dir // .workspace.project_dir // .cwd // "") # 23 - dir
     ] | .[]
   ')"
 
   # Parse jq output into an array (one element per line)
   # Initialize with defaults to handle partial/failed jq output
-  values=("" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "")
+  values=("" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "")
 
   # Only parse if jq produced output
   if [ -n "$jq_output" ]; then
@@ -221,10 +211,6 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
   export CLAUDE_OUTPUT_TOKENS="${values[19]:-}"
   export CLAUDE_CACHE_CREATION="${values[20]:-}"
   export CLAUDE_CACHE_READ="${values[21]:-}"
-  export CLAUDE_RATE_5H_PCT="${values[24]:-}"
-  export CLAUDE_RATE_5H_RESETS="${values[25]:-}"
-  export CLAUDE_RATE_7D_PCT="${values[26]:-}"
-  export CLAUDE_RATE_7D_RESETS="${values[27]:-}"
 
   raw_model="${values[22]:-}"
   dir="${values[23]:-}"
@@ -269,20 +255,6 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
   raw_cost="${values[8]:-}"
   if [ -n "$raw_cost" ]; then
     export CLAUDE_COST="$(printf '$%.2f' "$raw_cost")"
-  fi
-
-  #
-  # Rate limits: 5h/7d usage percentage (Pro/Max subscribers only)
-  # Absent until after the first API response in a session.
-  #
-  rl_5h="${values[24]:-}"
-  rl_7d="${values[26]:-}"
-
-  if [ -n "$rl_5h" ] || [ -n "$rl_7d" ]; then
-    rate_str=""
-    [ -n "$rl_5h" ] && rate_str="5h:$(printf '%.0f' "$rl_5h")%"
-    [ -n "$rl_7d" ] && rate_str="${rate_str:+$rate_str }7d:$(printf '%.0f' "$rl_7d")%"
-    export CLAUDE_RATE_LIMITS="$rate_str"
   fi
 
   #
