@@ -1,7 +1,7 @@
 ---
 name: plan-issue
 description: Plan a GitHub issue with structured acceptance criteria and add it to a GitHub project. Use when asked to plan, draft, or create a GitHub issue.
-argument-hint: "<description> [--project N] [--type feat|fix|chore|docs|test]"
+argument-hint: "<description> [--project N] [--type enhancement|bug|chore|documentation|test]"
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob
 ---
@@ -14,7 +14,7 @@ Plan and create a GitHub issue with structured acceptance criteria, then add it 
 
 - `<description>`: What the issue is about (required)
 - `--project N`: GitHub project number to add the issue to (prompts if not provided)
-- `--type TYPE`: Issue type — `feat`, `fix`, `chore`, `docs`, or `test` (inferred if not provided)
+- `--type TYPE`: Issue type — `enhancement`, `bug`, `chore`, `documentation`, or `test` (inferred if not provided)
 
 ## Your task
 
@@ -29,7 +29,6 @@ Plan and create a GitHub issue with structured acceptance criteria, then add it 
 - Run `gh repo view --json name,owner,url` to identify the current repo
 - Check for duplicate or related open issues: `gh issue list --search "<keywords from description>" --limit 10`
 - If the issue touches specific code, search the codebase for relevant files and patterns
-- If a `docs/prd/ROADMAP.md` exists, read it to check whether this fits an existing planned item
 
 ### Step 3: Infer issue type
 
@@ -37,19 +36,19 @@ If `--type` was not provided, determine from the description:
 
 | Intent | Label |
 |--------|-------|
-| New functionality or capability | `feat` |
-| Something is broken or wrong | `fix` |
+| New functionality or capability | `enhancement` |
+| Something is broken or wrong | `bug` |
 | Infrastructure, tooling, dependencies | `chore` |
-| Documentation, comments, README | `docs` |
+| Documentation, comments, README | `documentation` |
 | Tests or coverage | `test` |
 
 ### Step 4: Draft the issue
 
 **Title**: Concise imperative phrase, under 60 characters.
-- `feat` → "Add X"
-- `fix` → "Fix X"
+- `enhancement` → "Add X"
+- `bug` → "Fix X"
 - `chore` → "Update/Upgrade X"
-- `docs` → "Document X"
+- `documentation` → "Document X"
 - `test` → "Add tests for X"
 
 **Body** using this template:
