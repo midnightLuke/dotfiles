@@ -16,6 +16,7 @@ Required Software
 * eza
 * fd
 * fzf
+* gh
 * git
 * go
 * php
@@ -46,6 +47,17 @@ Programming Language Support
 * go
 * nodejs
   * yarn
+
+Installation
+------------
+
+Use stow to link these files into their correct location:
+
+```bash
+stow --dotfiles --adopt .
+```
+
+This will adopt existing files into the repo, you can inspect differences via git (if there are none you are good to go).
 
 Post-Install Tasks
 ------------------
