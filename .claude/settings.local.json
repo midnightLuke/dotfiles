@@ -1,5 +1,10 @@
 {
   "enabledMcpjsonServers": [
     "context7"
-  ]
+  ],
+  "permissions": {
+    "allow": [
+      "Read(//Users/luke/.local/share/nvim/lazy/claudecode.nvim/lua/claudecode/**)"
+    ]
+  }
 }
