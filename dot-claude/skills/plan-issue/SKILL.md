@@ -34,13 +34,15 @@ Plan and create a GitHub issue with structured acceptance criteria, then add it 
 
 If `--type` was not provided, determine from the description:
 
-| Intent | Label |
-|--------|-------|
-| New functionality or capability | `enhancement` |
-| Something is broken or wrong | `bug` |
-| Infrastructure, tooling, dependencies | `chore` |
-| Documentation, comments, README | `documentation` |
-| Tests or coverage | `test` |
+| Intent | Label | GitHub Issue Type |
+|--------|-------|-------------------|
+| New functionality or capability | `enhancement` | `Feature` |
+| Something is broken or wrong | `bug` | `Bug` |
+| Infrastructure, tooling, dependencies | `chore` | `Task` |
+| Documentation, comments, README | `documentation` | `Task` |
+| Tests or coverage | `test` | `Task` |
+
+Note both the label (for `--label`) and the GitHub issue type (for the type field set after creation).
 
 ### Step 4: Draft the issue
 
@@ -84,7 +86,7 @@ Acceptance criteria guidelines:
 
 Show the full draft to the user:
 - Proposed title
-- Type label
+- Type label (e.g. `enhancement`) and GitHub issue type (e.g. `Feature`)
 - Full issue body (rendered clearly)
 - Target project (or "no project")
 
@@ -101,7 +103,36 @@ gh issue create \
   --label "<type-label>"
 ```
 
-Capture the issue URL from the output.
+Capture the issue URL and extract the issue number from it.
+
+### Step 7.5: Set the GitHub issue type
+
+GitHub issue types (Bug, Feature, Task) are a separate field from labels and must be set via GraphQL after creation.
+
+First, query the repository for available issue types and the issue's node ID:
+
+```bash
+gh api graphql -f query='
+{
+  repository(owner: "<owner>", name: "<repo>") {
+    issue(number: <number>) { id }
+    issueTypes(first: 20) { nodes { id name } }
+  }
+}'
+```
+
+If `issueTypes` returns nodes, find the one whose `name` matches the mapped GitHub type (`Bug`, `Feature`, or `Task`), then set it:
+
+```bash
+gh api graphql -f query='
+mutation {
+  updateIssue(input: { id: "<issue-node-id>", issueTypeId: "<type-node-id>" }) {
+    issue { id issueType { name } }
+  }
+}'
+```
+
+If `issueTypes` returns null or an empty list, the repository has no issue types configured — skip this step silently.
 
 ### Step 8: Add to GitHub project
 
