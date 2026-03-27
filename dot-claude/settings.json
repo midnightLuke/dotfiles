@@ -119,5 +119,5 @@
     "enabled": false
   },
   "alwaysThinkingEnabled": true,
-  "voiceEnabled": false
+  "voiceEnabled": true
 }
