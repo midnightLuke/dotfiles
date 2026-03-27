@@ -111,10 +111,27 @@
     "padding": 0
   },
   "enabledPlugins": {
+    "debugging-pipeline-failures@konflux-skills": true,
+    "navigating-github-to-konflux-pipelines@konflux-skills": true,
+    "understanding-konflux-resources@konflux-skills": true,
+    "working-with-provenance@konflux-skills": true,
+    "context7@claude-plugins-official": true,
+    "atlassian@claude-plugins-official": true,
+    "container-image@ai-helpers": true,
+    "jira@ai-helpers": true,
+    "agendas@ai-helpers": true,
     "starship-claude@starship-claude": true,
     "php-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "ai-helpers": {
+      "source": {
+        "source": "github",
+        "repo": "openshift-eng/ai-helpers"
+      }
+    }
   },
   "sandbox": {
     "enabled": false
