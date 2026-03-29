@@ -18,24 +18,25 @@ Merge a pull request with consistent practices: verify checks, squash merge, cle
 
 ### Step 1: Identify the PR
 
-- If a PR number was provided, use it
-- Otherwise, detect from the current branch: `gh pr view --json number,title,state,headRefName,baseRefName`
-- Confirm the PR exists and is open
+- Determine owner and repo by running `git remote get-url origin` and parsing the result
+- If a PR number was provided in `$ARGUMENTS`, use it directly
+- Otherwise, run `git branch --show-current` to get the current branch name, then use the `search_pull_requests` MCP tool with `query: "is:open head:<branch-name>"` and the owner/repo to find the PR number
+- Use `pull_request_read` with `method: "get"` to confirm the PR exists and is open
 - Display the PR title and number before proceeding
 
 ### Step 2: Verify merge readiness
 
 Check each of the following and report status:
 
-- **CI status**: Run `gh pr checks` to verify all required checks have passed
-- **Merge conflicts**: Run `gh pr view --json mergeable` to verify no conflicts
+- **CI status**: Use `pull_request_read` with `method: "get_check_runs"` to verify all required checks have passed
+- **Merge conflicts**: Use `pull_request_read` with `method: "get"` and check the `mergeable` field to verify no conflicts
 
 If CI has not passed, **stop and report**. Do not proceed with the merge.
 
 ### Step 3: Merge the PR
 
-- Squash merge: `gh pr merge --squash`
-- Do **not** pass `--delete-branch` — GitHub is configured to auto-delete remote branches on merge. Local branch cleanup is handled in Step 4.
+- Use the `merge_pull_request` MCP tool with `merge_method: "squash"`
+- Do **not** pass a delete-branch option — GitHub is configured to auto-delete remote branches on merge. Local branch cleanup is handled in Step 4.
 
 ### Step 4: Detect worktree context
 
@@ -51,7 +52,7 @@ git rev-parse --git-common-dir
 
 ### Step 5a: Update local state (normal repo)
 
-After `gh pr merge` completes:
+After the merge completes:
 
 - Switch to the base branch (e.g., `main`, `master`, or whatever `baseRefName` was detected in Step 1) and pull: `git switch <base-branch> && git pull`
 - Delete the local feature branch with `git branch -D <branch-name>` (force-delete is required because squash merges produce a different SHA, so `-d` cannot detect the branch as merged)

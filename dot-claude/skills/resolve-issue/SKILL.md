@@ -16,13 +16,14 @@ Track your progress through the 6 steps below. Report completion of each step be
 
 ### Step 1: Get issue details
 
-- Run `gh issue view $ARGUMENTS` to get issue details
+- Determine owner and repo by running `git remote get-url origin` and parsing the result
+- Use the `issue_read` MCP tool with `method: "get"` to get issue details
 - Extract title, description, labels, and comments
 - Identify complexity and scope
 
 ### Step 2: Research and understand
 
-- Search related PRs: `gh pr list --search "fix issue $ARGUMENTS"`
+- Search related PRs using the `search_pull_requests` MCP tool with a query like `"fix <issue-number> repo:<owner>/<repo>"`
 - Search codebase for relevant files and patterns
 - Review similar issues if applicable
 
@@ -55,7 +56,7 @@ Track your progress through the 6 steps below. Report completion of each step be
 - Run comprehensive tests across all changes
 - Verify the original issue is resolved completely
 - Check for regressions
-- Update the issue to check off all completed acceptance criteria checkboxes: fetch the current body with `gh issue view $ARGUMENTS --json body --jq '.body'`, replace `- [ ]` with `- [x]` for completed items, then update with `gh issue edit $ARGUMENTS --body "$updated_body"`
+- Update the issue to check off all completed acceptance criteria checkboxes: use `issue_read` with `method: "get"` to fetch the current body, replace `- [ ]` with `- [x]` for completed items, then update with `issue_write` with `method: "update"` and the new body
 - **STOP**: Do not proceed until all checks pass
 
 ### Step 6: Report back

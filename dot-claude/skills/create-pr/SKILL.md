@@ -55,9 +55,8 @@ All flags are optional. By default, the issue number is inferred from the branch
    - **Default format**: Always use "Closes #N" (assume PR fully resolves issue)
 
 7. **Create the PR**:
-   - Use `gh pr create` with generated title and description
-   - Set base branch (usually main/master)
-   - **Default to ready** (no `--draft` flag) unless `--draft` flag is explicitly passed
+   - Determine owner and repo by running `git remote get-url origin` and parsing the result
+   - Use the `create_pull_request` MCP tool with the generated title, description body, head (current branch), base branch, and `draft: true` if `--draft` was passed
 
 8. **Confirm and display**:
    - Show PR URL and title

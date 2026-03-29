@@ -19,8 +19,9 @@ Review GitHub pull requests and report findings. This skill analyzes and reports
 ## Your task
 
 1. **Get PR details**:
-   - Run `gh pr view $ARGUMENTS --json number,title,body,additions,deletions,changedFiles`
-   - Run `gh pr diff $ARGUMENTS` to review the actual changes
+   - Determine owner and repo by running `git remote get-url origin` and parsing the result
+   - Use the `pull_request_read` MCP tool with `method: "get"` to get PR details (number, title, body, additions, deletions, changedFiles)
+   - Use `pull_request_read` with `method: "get_diff"` to get the full diff
    - Extract PR context, linked issues, and purpose
 
 2. **Choose review depth** based on flags or PR characteristics:
@@ -31,8 +32,8 @@ Review GitHub pull requests and report findings. This skill analyzes and reports
    - **Thorough**: Everything else
 
 3. **Check existing feedback**:
-   - Fetch review comments: `gh api /repos/{owner}/{repo}/pulls/{number}/comments`
-   - Check CI/CD status: `gh pr checks $ARGUMENTS`
+   - Use `pull_request_read` with `method: "get_review_comments"` to fetch review threads
+   - Use `pull_request_read` with `method: "get_check_runs"` to check CI/CD status
    - Note any unresolved threads or failing checks
 
 4. **Analyze the PR**:
