@@ -2,10 +2,13 @@
   "permissions": {
     "allow": [
       "Read(//Users/luke/.local/share/nvim/lazy/claudecode.nvim/lua/claudecode/**)",
-      "Bash(python3 -m json.tool)"
+      "Bash(python3 -m json.tool)",
+      "WebFetch(domain:support.atlassian.com)"
     ]
   },
   "enabledMcpjsonServers": [
-    "context7"
+    "context7",
+    "atlassian",
+    "github"
   ]
 }
