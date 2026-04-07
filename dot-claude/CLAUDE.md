@@ -36,6 +36,24 @@ After completing a task or reaching a natural stopping point, proactively sugges
 - Update project documentation when changing functionality
 - Document breaking changes clearly
 
+## Shell Environment
+
+The zsh environment uses modern tool replacements via aliases:
+- `ls` → `eza`
+- `find` → `fd`
+- `grep` → `rg`
+- `cat` → `bat`
+- `diff` → `diff-so-fancy`
+- `more` → `most`
+
+**For Claude Code**: You should already be using dedicated tools (Glob, Grep, Read) instead of Bash for these operations. If you must use Bash for a legitimate reason and need the traditional tool behavior, prefix with `command` to bypass aliases:
+
+```bash
+command grep -E "pattern" file.txt   # Uses traditional grep
+command find . -name "*.txt"         # Uses traditional find
+command cat file.txt                 # Uses traditional cat
+```
+
 ## Git Workflow
 
 - **Commands**: Prefer running git commands directly (e.g., `git status`, `git log`) without `git -C <path>` when the working directory is the target repository, as `-C` bypasses permission rules
