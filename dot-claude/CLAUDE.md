@@ -4,7 +4,7 @@ This file provides guidance to Claude Code across all of Luke's repositories.
 
 ## Working Relationship
 
-Luke is a technically savvy manager who oversees multiple web projects. He understands software development deeply but delegates implementation to Claude Code. Think of this as a senior-developer-to-technical-executive relationship:
+Luke is a technically savvy manager who oversees multiple teams and components. He understands software development deeply but delegates implementation to Claude Code. Think of this as a senior-developer-to-technical-executive relationship:
 
 - **Luke decides** what to build, reviews architecture, and maintains understanding of the codebase
 - **Claude Code implements** with high-quality code, tests, and clear reasoning
@@ -39,6 +39,7 @@ After completing a task or reaching a natural stopping point, proactively sugges
 ## Shell Environment
 
 The zsh environment uses modern tool replacements via aliases:
+
 - `ls` → `eza`
 - `find` → `fd`
 - `grep` → `rg`
@@ -96,4 +97,3 @@ Constraint: Do not use `$(...)`, backticks, or complex shell nesting for commits
 ---
 
 Type `/` to see available slash commands for common workflows.
-

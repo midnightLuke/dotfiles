@@ -1,3 +1,6 @@
+# Check for interactive shell.
+[[ $- != *i* ]] && return
+
 # Antigen setup.
 if command -v brew &> /dev/null
 then
@@ -52,6 +55,7 @@ alias pcl="podman compose logs"
 alias pclf="podman compose logs -f"
 alias pcr="podman compose run --rm -it"
 alias lg="lazygit"
+alias docker="podman"
 
 # Start starship.
 eval "$(starship init zsh)"
@@ -82,6 +86,10 @@ fi
 
 # Set up fzf.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Secrets.
+export GITHUB_PERSONAL_ACCESS_TOKEN=$(op read "op://Private/GitHub/token")
+export ATLASSIAN_ACCESS_TOKEN=$(op read "op://Private/Atlassian/token")
 
 # Local secrets — not committed
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
